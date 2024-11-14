@@ -1,13 +1,11 @@
-<script setup lang="ts">
-import Header from './components/Header.vue'
-</script>
-
 <template>
   <Header />
 
   <main>
-    <p>main component</p>
+    <RouterView />
   </main>
 </template>
 
-<style scoped></style>
+<script setup lang="ts">
+import Header from './components/Header.vue'
+</script>
