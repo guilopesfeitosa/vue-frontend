@@ -1,9 +1,161 @@
 <template>
-  <h1>Appointments</h1>
+  <div class="mx-auto max-w-3xl flex flex-col">
+    <PageTitle title="Cadastro de Consultas" />
+
+    <form @submit="createAppointment" class="flex flex-col gap-4">
+      <div class="flex items-center gap-2">
+        <div class="flex flex-col gap-1 w-1/2">
+          <label for="schedule">Agenda</label>
+          <select
+            id="schedule"
+            required
+            v-model="selectedSchedule"
+            @change="updateTimes"
+            class="px-2 py-2 bg-transparent border border-slate-200 rounded-sm"
+          >
+            <option value="" disabled>Selecione uma agenda</option>
+            <option v-for="schedule in schedules" :key="schedule.id" :value="schedule.id">
+              Médico: {{ schedule.doctor.name }} | Data: {{ formatDate(schedule.date as string) }}
+            </option>
+          </select>
+        </div>
+        <div class="flex flex-col gap-1 w-1/2">
+          <label for="time">Horário</label>
+          <select
+            id="time"
+            required
+            v-model="selectedTime"
+            :disabled="allTimes.length === 0"
+            class="px-2 py-2 bg-transparent border border-slate-200 rounded-sm disabled:text-gray-300"
+          >
+            <option value="" disabled>Selecione um horário</option>
+            <option
+              v-for="time in allTimes"
+              :key="time.id"
+              :value="time.id"
+              :disabled="!time.isAvaliable"
+            >
+              {{ time.hour }} <span v-if="!time.isAvaliable">(Indisponível)</span>
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="flex flex-col gap-1">
+        <label for="patient">Paciente</label>
+        <select
+          id="patient"
+          required
+          v-model="selectedPatient"
+          class="px-2 py-2 bg-transparent border border-slate-200 rounded-sm"
+        >
+          <option value="" disabled>Selecione um paciente</option>
+          <option v-for="patient in patients" :key="patient.id" :value="patient.id">
+            {{ patient.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="flex justify-end">
+        <SubmitInput label="Cadastrar" />
+      </div>
+    </form>
+  </div>
 </template>
 
 <script lang="ts">
+import PageTitle from '@/components/PageTitle.vue'
+import SubmitInput from '@/components/SubmitInput.vue'
+import type { Patient } from '@/types/patient'
+import type { Schedule } from '@/types/schedule'
+import type { Time } from '@/types/time'
+import axios from 'axios'
+
 export default {
   name: 'AppointmentsView',
+  components: { PageTitle, SubmitInput },
+  data() {
+    return {
+      schedules: [] as Schedule[],
+      patients: [] as Patient[],
+      allTimes: [] as Time[],
+      selectedSchedule: '',
+      selectedTime: '',
+      selectedPatient: '',
+    }
+  },
+  methods: {
+    async fetchSchedules() {
+      try {
+        const response = await axios.get('http://localhost:3000/schedules')
+        this.schedules = response.data
+      } catch (error) {
+        console.error('Erro ao buscar agendas:', error)
+      }
+    },
+
+    async fetchPatients() {
+      try {
+        const response = await axios.get('http://localhost:3000/patients')
+        this.patients = response.data
+      } catch (error) {
+        console.error('Erro ao buscar pacientes:', error)
+      }
+    },
+
+    updateTimes() {
+      const schedule = this.schedules.find((schedule) => schedule.id === this.selectedSchedule)
+      this.allTimes = schedule ? schedule.times : []
+      this.selectedTime = ''
+    },
+
+    async createAppointment(e: Event) {
+      e.preventDefault()
+
+      if (!this.selectedSchedule || !this.selectedTime || !this.selectedPatient) {
+        alert('Preencha todos os campos antes de cadastrar a consulta.')
+        return
+      }
+
+      const appointmentData = {
+        date: this.schedules.find((schedule) => schedule.id === this.selectedSchedule)?.date,
+        patient: this.patients.find((patient) => patient.id === this.selectedPatient),
+        doctor: this.schedules.find((schedule) => schedule.id === this.selectedSchedule)?.doctor,
+        time: this.allTimes.find((time) => time.id === this.selectedTime)?.hour,
+      }
+
+      try {
+        await axios.post('http://localhost:3000/appointments', appointmentData)
+
+        // Marca o horário como indisponível
+        await axios.patch(`http://localhost:3000/schedules/${this.selectedSchedule}`, {
+          times: this.allTimes.map((time) =>
+            time.id === this.selectedTime ? { ...time, isAvaliable: false } : time,
+          ),
+        })
+
+        alert('Consulta cadastrada com sucesso!')
+        this.resetForm()
+        this.fetchSchedules()
+      } catch (error) {
+        console.error('Erro ao cadastrar consulta:', error)
+        alert('Erro ao cadastrar consulta.')
+      }
+    },
+    resetForm() {
+      this.selectedSchedule = ''
+      this.selectedTime = ''
+      this.selectedPatient = ''
+      this.allTimes = []
+    },
+    formatDate(value: string) {
+      if (!value) return ''
+      const [year, month, day] = value.split('-')
+      return `${day}/${month}/${year}`
+    },
+  },
+  mounted() {
+    this.fetchSchedules()
+    this.fetchPatients()
+  },
 }
 </script>
