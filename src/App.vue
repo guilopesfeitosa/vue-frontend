@@ -1,7 +1,7 @@
 <template>
   <Header />
 
-  <main>
+  <main class="mx-auto max-w-5xl px-2 py-6">
     <RouterView />
   </main>
 </template>
