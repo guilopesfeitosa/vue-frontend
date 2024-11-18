@@ -29,8 +29,31 @@
   ],
   "appointments": [
     {
-      "id": "8aae",
-      "date": "2024-11-19",
+      "id": "f2f7",
+      "schedule": {
+        "id": "7e72",
+        "doctor": {
+          "id": "e018",
+          "name": "Dr. Guilherme",
+          "crmNumber": 19228,
+          "state": "SP"
+        },
+        "date": "2024-11-19",
+        "times": [
+          {
+            "hour": "08:00",
+            "available": true
+          },
+          {
+            "hour": "09:00",
+            "available": true
+          },
+          {
+            "hour": "10:00",
+            "available": true
+          }
+        ]
+      },
       "patient": {
         "id": "84cddfdf-6fab-4c5f-a98e-3d762a1a8399",
         "name": "Joaozim",
@@ -48,18 +71,42 @@
           "city": "Maringá",
           "state": "PR"
         }
-      },
-      "doctor": {
-        "id": "e018",
-        "name": "Dr. Guilherme",
-        "crmNumber": 19228,
-        "state": "SP"
-      },
-      "time": "08:00"
+      }
     },
     {
-      "id": "77ad",
-      "date": "2024-11-18",
+      "id": "1f8a",
+      "schedule": {
+        "id": "a46a",
+        "doctor": {
+          "id": "e018",
+          "name": "Dr. Guilherme",
+          "crmNumber": 19228,
+          "state": "SP"
+        },
+        "date": "2024-11-20",
+        "times": [
+          {
+            "hour": "08:00",
+            "available": true
+          },
+          {
+            "hour": "10:00",
+            "available": true
+          },
+          {
+            "hour": "09:00",
+            "available": true
+          },
+          {
+            "hour": "13:00",
+            "available": true
+          }
+        ]
+      },
+      "selectedTime": {
+        "hour": "08:00",
+        "available": true
+      },
       "patient": {
         "id": "84cddfdf-6fab-4c5f-a98e-3d762a1a8399",
         "name": "Joaozim",
@@ -77,19 +124,12 @@
           "city": "Maringá",
           "state": "PR"
         }
-      },
-      "doctor": {
-        "id": "e018",
-        "name": "Dr. Guilherme",
-        "crmNumber": 19228,
-        "state": "SP"
-      },
-      "time": "08:00"
+      }
     }
   ],
   "schedules": [
     {
-      "id": "ef04",
+      "id": "7e72",
       "doctor": {
         "id": "e018",
         "name": "Dr. Guilherme",
@@ -99,51 +139,44 @@
       "date": "2024-11-19",
       "times": [
         {
-          "id": "1",
           "hour": "08:00",
           "available": false
         },
         {
-          "id": "2",
           "hour": "09:00",
-          "available": true
+          "available": false
         },
         {
-          "id": "3",
-          "hour": "15:00",
-          "available": true
+          "hour": "10:00",
+          "available": false
         }
       ]
     },
     {
-      "id": "068d",
+      "id": "a46a",
       "doctor": {
         "id": "e018",
         "name": "Dr. Guilherme",
         "crmNumber": 19228,
         "state": "SP"
       },
-      "date": "2024-11-18",
+      "date": "2024-11-20",
       "times": [
         {
-          "id": "1",
           "hour": "08:00",
           "available": false
         },
         {
-          "id": "2",
-          "hour": "09:00",
-          "available": true
-        },
-        {
-          "id": "3",
           "hour": "10:00",
-          "available": true
+          "available": false
         },
         {
-          "id": "4",
-          "hour": "11:00",
-          "available": true
+          "hour": "09:00",
+          "available": false
+        },
+        {
+          "hour": "13:00",
+          "available": false
         }
       ]
     }

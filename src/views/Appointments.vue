@@ -76,8 +76,8 @@ export default {
   data() {
     return {
       schedules: [] as Schedule[],
-      patients: [] as Patient[],
       allTimes: [] as Time[],
+      patients: [] as Patient[],
       selectedSchedule: '',
       selectedTime: '',
       selectedPatient: '',
@@ -111,16 +111,18 @@ export default {
     async createAppointment(e: Event) {
       e.preventDefault()
 
-      if (!this.selectedSchedule || !this.selectedTime || !this.selectedPatient) {
-        alert('Preencha todos os campos antes de cadastrar a consulta.')
-        return
-      }
+      // if (!this.selectedSchedule || !this.selectedTime || !this.selectedPatient) {
+      //   alert('Preencha todos os campos antes de cadastrar a consulta.')
+      //   return
+      // }
 
       const appointmentData = {
         schedule: this.schedules.find((schedule) => schedule.id === this.selectedSchedule),
-        selectedTime: this.allTimes.find((time) => time.id === this.selectedTime)?.id,
+        selectedTime: this.allTimes.find((time) => time.id === this.selectedTime),
         patient: this.patients.find((patient) => patient.id === this.selectedPatient),
       }
+
+      console.log(JSON.stringify(appointmentData, null, 2))
 
       try {
         await axios.post('http://localhost:3000/appointments', appointmentData)
