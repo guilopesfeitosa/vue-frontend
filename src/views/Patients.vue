@@ -9,35 +9,35 @@
         <div class="flex flex-col gap-1 w-1/3">
           <label for="name">Nome</label>
           <input
+            required
             type="text"
             id="name"
             name="name"
             v-model="patientName"
             placeholder="Insira o nome do paciente"
             class="px-2 py-1 border border-slate-200 rounded-sm"
-            required
           />
         </div>
         <div class="flex flex-col gap-1 w-1/3">
           <label for="age">Idade</label>
           <input
-            type="number"
+            required
             id="age"
             name="age"
+            type="number"
             v-model="patientAge"
             placeholder="Insira a idade do paciente"
             class="px-2 py-1 border border-slate-200 rounded-sm"
-            required
           />
         </div>
         <div class="flex flex-col gap-1 w-1/3">
           <label for="gender">Gênero</label>
           <select
-            v-model="patientGender"
-            name="gender"
-            id="gender"
-            class="px-2 py-2 bg-transparent border border-slate-200 rounded-sm"
             required
+            id="gender"
+            name="gender"
+            v-model="patientGender"
+            class="px-2 py-2 bg-transparent border border-slate-200 rounded-sm"
           >
             <option value="" disabled>Selecione o gênero</option>
             <option value="Male">Masculino</option>
@@ -50,30 +50,31 @@
         <div class="flex flex-col gap-1 w-1/3">
           <label for="document">CPF</label>
           <input
+            required
             type="text"
             id="document"
             name="document"
             v-model="patientDocument"
             placeholder="Insira o CPF do paciente"
             class="px-2 py-1 border border-slate-200 rounded-sm"
-            required
           />
         </div>
         <div class="flex flex-col gap-1 w-1/3">
           <label for="phone">Telefone</label>
           <input
+            required
             type="text"
             id="phone"
             name="phone"
             v-model="patientPhone"
             placeholder="Insira o telefone do paciente"
             class="px-2 py-1 border border-slate-200 rounded-sm"
-            required
           />
         </div>
         <div class="flex flex-col gap-1 w-1/3">
           <label for="email">E-mail</label>
           <input
+            required
             type="email"
             id="email"
             name="email"
@@ -90,6 +91,7 @@
         <div class="flex flex-col gap-1 w-2/6">
           <label for="cep">CEP</label>
           <input
+            required
             type="text"
             id="cep"
             name="cep"
@@ -97,31 +99,30 @@
             placeholder="Insira o CEP"
             class="px-2 py-1 border border-slate-200 rounded-sm"
             @blur="fetchAddressFromCep"
-            required
           />
         </div>
         <div class="flex flex-col gap-1 w-3/6">
           <label for="street">Logradouro</label>
           <input
+            required
             type="text"
             id="street"
             name="street"
             v-model="patientAddress.street"
             placeholder="Insira o logradouro"
             class="px-2 py-1 border border-slate-200 rounded-sm"
-            required
           />
         </div>
         <div class="flex flex-col gap-1 w-1/6">
           <label for="number">Número</label>
           <input
+            required
             type="text"
             id="number"
             name="number"
             v-model="patientAddress.number"
             placeholder="Insira o número"
             class="px-2 py-1 border border-slate-200 rounded-sm"
-            required
           />
         </div>
       </div>
@@ -130,13 +131,13 @@
         <div class="flex flex-col gap-1 w-1/2">
           <label for="neighborhood">Bairro</label>
           <input
+            required
             type="text"
             id="neighborhood"
             name="neighborhood"
             v-model="patientAddress.neighborhood"
             placeholder="Insira o bairro"
             class="px-2 py-1 border border-slate-200 rounded-sm"
-            required
           />
         </div>
         <div class="flex flex-col gap-1 w-1/2">
@@ -155,13 +156,13 @@
         <div class="flex flex-col gap-1 w-2/3">
           <label for="city">Cidade</label>
           <input
+            required
             type="text"
             id="city"
             name="city"
             v-model="patientAddress.city"
             placeholder="Insira a cidade"
             class="px-2 py-1 border border-slate-200 rounded-sm"
-            required
           />
         </div>
         <div class="flex flex-col gap-1 w-1/3">

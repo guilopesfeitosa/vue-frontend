@@ -1,9 +1,9 @@
-import type { Doctor } from './doctor'
 import type { Patient } from './patient'
+import type { Schedule } from './schedule'
 
 export type Appointment = {
   id: string
-  date: Date
+  schedule: Schedule
+  selectedTime: string
   patient: Patient
-  doctor: Doctor
 }

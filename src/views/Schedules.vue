@@ -99,8 +99,7 @@ export default {
       const data = {
         doctor: this.selectedDoctor,
         date: this.date,
-        times: this.times.map((time, index) => ({
-          id: (index + 1).toString(),
+        times: this.times.map((time) => ({
           hour: time,
           isAvaliable: true,
         })),
