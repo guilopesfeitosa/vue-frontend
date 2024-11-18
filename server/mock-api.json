@@ -140,15 +140,15 @@
       "times": [
         {
           "hour": "08:00",
-          "available": false
+          "available": true
         },
         {
           "hour": "09:00",
-          "available": false
+          "available": true
         },
         {
           "hour": "10:00",
-          "available": false
+          "available": true
         }
       ]
     },

@@ -127,13 +127,6 @@ export default {
       try {
         await axios.post('http://localhost:3000/appointments', appointmentData)
 
-        // Marca o horário como indisponível
-        await axios.patch(`http://localhost:3000/schedules/${this.selectedSchedule}`, {
-          times: this.allTimes.map((time) =>
-            time.id === this.selectedTime ? { ...time, available: false } : time,
-          ),
-        })
-
         alert('Consulta cadastrada com sucesso!')
         this.resetForm()
         this.fetchSchedules()
