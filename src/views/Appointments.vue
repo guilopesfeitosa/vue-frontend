@@ -143,8 +143,17 @@ export default {
     },
     formatDate(value: string) {
       if (!value) return ''
-      const [year, month, day] = value.split('-')
-      return `${day}/${month}/${year}`
+      try {
+        const date = new Date(value)
+        return new Intl.DateTimeFormat('pt-BR', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+        }).format(date)
+      } catch (error) {
+        console.error('Erro ao formatar a data:', error)
+        return value
+      }
     },
   },
   mounted() {
