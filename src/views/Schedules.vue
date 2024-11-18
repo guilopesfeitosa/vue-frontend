@@ -101,7 +101,7 @@ export default {
         date: this.date,
         times: this.times.map((time) => ({
           hour: time,
-          isAvaliable: true,
+          available: true,
         })),
       }
 

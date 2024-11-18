@@ -101,17 +101,17 @@
         {
           "id": "1",
           "hour": "08:00",
-          "isAvaliable": false
+          "available": false
         },
         {
           "id": "2",
           "hour": "09:00",
-          "isAvaliable": true
+          "available": true
         },
         {
           "id": "3",
           "hour": "15:00",
-          "isAvaliable": true
+          "available": true
         }
       ]
     },
@@ -128,22 +128,22 @@
         {
           "id": "1",
           "hour": "08:00",
-          "isAvaliable": false
+          "available": false
         },
         {
           "id": "2",
           "hour": "09:00",
-          "isAvaliable": true
+          "available": true
         },
         {
           "id": "3",
           "hour": "10:00",
-          "isAvaliable": true
+          "available": true
         },
         {
           "id": "4",
           "hour": "11:00",
-          "isAvaliable": true
+          "available": true
         }
       ]
     }

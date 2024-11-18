@@ -33,9 +33,9 @@
               v-for="time in allTimes"
               :key="time.id"
               :value="time.id"
-              :disabled="!time.isAvaliable"
+              :disabled="!time.available"
             >
-              {{ time.hour }} <span v-if="!time.isAvaliable">(Indisponível)</span>
+              {{ time.hour }} <span v-if="!time.available">(Indisponível)</span>
             </option>
           </select>
         </div>
@@ -117,10 +117,9 @@ export default {
       }
 
       const appointmentData = {
-        date: this.schedules.find((schedule) => schedule.id === this.selectedSchedule)?.date,
+        schedule: this.schedules.find((schedule) => schedule.id === this.selectedSchedule),
+        selectedTime: this.allTimes.find((time) => time.id === this.selectedTime)?.id,
         patient: this.patients.find((patient) => patient.id === this.selectedPatient),
-        doctor: this.schedules.find((schedule) => schedule.id === this.selectedSchedule)?.doctor,
-        time: this.allTimes.find((time) => time.id === this.selectedTime)?.hour,
       }
 
       try {
@@ -129,7 +128,7 @@ export default {
         // Marca o horário como indisponível
         await axios.patch(`http://localhost:3000/schedules/${this.selectedSchedule}`, {
           times: this.allTimes.map((time) =>
-            time.id === this.selectedTime ? { ...time, isAvaliable: false } : time,
+            time.id === this.selectedTime ? { ...time, available: false } : time,
           ),
         })
 

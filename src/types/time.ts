@@ -1,5 +1,5 @@
 export type Time = {
   id: string
   hour: string
-  isAvaliable: boolean
+  available: boolean
 }
